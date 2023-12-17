@@ -3,11 +3,12 @@ let testSmallShip;
 let testMediumShip;
 
 beforeEach(() => {
-  testSmallShip = new Ship(1);
-  testMediumShip = new Ship(2);
+  testSmallShip = new Ship('smallship', 1);
+  testMediumShip = new Ship('mediumship', 2);
 });
 
-test("Hit marks damage", () => {
+test("Can hit unsunk ship", () => {
+  expect(testSmallShip.sunk).not.toBe(true)
   testSmallShip.hit();
   expect(testSmallShip.damage).toBe(1);
 });
@@ -22,6 +23,11 @@ test("Sunk if length = damage", () => {
   testMediumShip.hit();
   expect(testMediumShip.sunk).toBe(true);
 });
+
+test("Sunk if length != damage", () =>  {
+  testMediumShip.hit();
+  expect(testMediumShip.sunk).not.toBe(true);
+})
 
 test("Cannot hit sunk ship", () => {
   testSmallShip.hit();

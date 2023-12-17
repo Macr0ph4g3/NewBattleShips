@@ -5,16 +5,17 @@
 // isSunk() should be a function that calculates whether a ship is considered sunk based on its length and the number of hits it has received.
 
 class Ship {
-  constructor(length) {
+  constructor(name, length) {
+    this.name = name
     this.length = length;
     this.damage = 0;
     this.sunk = false;
+    this.placed = false
   }
   hit() {
     if(this.sunk === true) {
       return false
     }
-    console.log(`length = ${this.length}, damage = ${this.damage}`)
     this.damage += 1
     this.isSunk()
     return true
