@@ -11,7 +11,9 @@ class Gameboard {
   generateShips() {
     const testSmallShip = new Ship("smallship", 2);
     const testMediumShip = new Ship("mediumship", 3);
-    const shipArray = [testSmallShip, testMediumShip];
+    const testLargeShip = new Ship("mediumship", 4);
+
+    const shipArray = [testSmallShip, testMediumShip, testLargeShip];
     return shipArray;
   }
   // Placing the ship should require the ship being placed, an X coordinate, and a Y coordinate.
@@ -26,10 +28,6 @@ class Gameboard {
   placeShip(ship, x, y, alignment) {
     const locationInArray = x - 1 + (y - 1) * 10;
 
-    // // If the ship being used has already been placed
-    // if (ship.placed) {
-    //   throw new Error("Already placed ship");
-    // }
     // If trying to go past the X axis
     if (alignment === "wide") {
       if (x + ship.length > 10) {
@@ -44,37 +42,38 @@ class Gameboard {
     }
 
     // Check if the spaces are occupied by calculating the amount of spaces that are available
-    try {
-      let availableSpaces = 0;
-      const cellsChecked = [];
-      for (let i = 0; i < ship.length; i++) {
-        // Wide calculates by adding 1 to the location
-        if (alignment === "wide") {
-          if (this.coordinateList[locationInArray + i].hasShip == false) {
-            cellsChecked.push(i);
-            availableSpaces += 1;
-          }
-        }
-        // Tall calculates by adding 10 to the location
-        if (alignment === "tall") {
-          if (this.coordinateList[locationInArray + i * 10].hasShip == false) {
-            cellsChecked.push(i);
-            availableSpaces += 1;
-          }
+    let availableSpaces = 0;
+    for (let i = 0; i < ship.length; i++) {
+      // Wide calculates by adding 1 to the location
+      if (alignment === "wide") {
+        if (this.coordinateList[locationInArray + i].hasShip == false) {
+          availableSpaces += 1;
         }
       }
-      if (availableSpaces == ship.length) {
-        console.log("available spaces is ship length");
-        for (let i = 0; i < ship.length; i++) {
-          this.coordinateList[locationInArray + cellsChecked[i]] = ship;
+      // Tall calculates by adding 10 to the location
+      if (alignment === "tall") {
+        if (this.coordinateList[locationInArray + i * 10].hasShip == false) {
+          availableSpaces += 1;
         }
       }
-    } catch (error) {
-      throw new Error("Impossible Placement: Insufficent Available Spaces");
     }
 
-    ship.placed = true;
+    // Placement of ship after checks are made
+    if (availableSpaces == ship.length) {
+      for (let i = 0; i < ship.length; i++) {
+        // Horizontal placement
+        if (alignment === "wide") {
+          this.coordinateList[locationInArray + i] = ship;
+        }
+        if (alignment === "tall") {
+          this.coordinateList[locationInArray + i * 10] = ship;
+        }
+      }
+    } else {
+      throw new Error("Insufficient Available Spaces");
+    }
   }
+
   receiveAttack() {}
 }
 

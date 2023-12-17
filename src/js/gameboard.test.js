@@ -7,7 +7,7 @@ beforeEach(() => {
   computerGameboard = new Gameboard()
 });
 
-test.only("Gameboard can place a ship horizontally", () => {
+test("Gameboard can place a ship horizontally", () => {
 
   userGameboard.placeShip(userGameboard.ships[0], 1, 1, 'wide',)
   expect(userGameboard.coordinateList[0]).toEqual(userGameboard.ships[0])
@@ -18,68 +18,78 @@ test.only("Gameboard can place a ship horizontally", () => {
 test("Gameboard can place a ship vertically", () => {
   userGameboard.placeShip(userGameboard.ships[0], 1, 1, 'tall',)
   expect(userGameboard.coordinateList[0]).toEqual(userGameboard.ships[0])
-  expect(userGameboard.coordinateList[9]).toEqual(userGameboard.ships[0])
-
-})
-
-test("Can't place a ship if already put on coordinate list", ()=>{
-
-  userGameboard.placeShip(userGameboard.ships[0], 1, 'wide');
-  expect(() => {
-      userGameboard.placeShip(userGameboard.ships[0], 1, 'wide');
-  }).toThrow('Already placed ship');
+  expect(userGameboard.coordinateList[10]).toEqual(userGameboard.ships[0])
 
 })
 
 test('Cannot place two ships in same location', ()=> {
-  userGameboard.placeShip(userGameboard.ships[0], 1, 'wide');
+  userGameboard.placeShip(userGameboard.ships[0], 1, 1, 'wide');
   expect(() => {
-      userGameboard.placeShip(userGameboard.ships[1], 1);
-  }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[1], 1, 1,'wide');
+  }).toThrow('Insufficient Available Spaces');
 
 })
 
 
 test('Can place multiple ships', ()=>{
-  userGameboard.placeShip(userGameboard.ships[0], 1, 'wide')
+  userGameboard.placeShip(userGameboard.ships[0], 1, 1, 'wide');
+  userGameboard.placeShip(userGameboard.ships[1], 1, 2, 'wide');
+
   expect(userGameboard.coordinateList).toContain(userGameboard.ships[0])
+  expect(userGameboard.coordinateList).toContain(userGameboard.ships[1])
 
 })
 
 test("Can't place a ship if it goes outside the boundaries of the X axis", ()=>{
-    // X axis would be every 10 coordinates.
     expect(() => {
       userGameboard.placeShip(userGameboard.ships[2], 9, 1, 'wide');
-    }).toThrow('Space occupied');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 19, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2], 9, 2, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 29, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2], 9, 3, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 39, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2], 9, 4, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 49, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2], 9, 5, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 59, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2], 9, 6, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 69, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2],  9, 7, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 79, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2], 9, 8, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 89, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2],  9, 9, 'wide');
+    }).toThrow('Impossible Placement Wide');
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 99, 'wide');
-    }).toThrow('Space occupied');
+      userGameboard.placeShip(userGameboard.ships[2],  9, 10, 'wide');
+    }).toThrow('Impossible Placement Wide');
                                         
 })
+
+test("Can't place a ship if it goes outside the boundaries of the y axis", ()=>{
+  expect(() => {
+    userGameboard.placeShip(userGameboard.ships[2],  9, 7, 'tall');
+  }).toThrow('Impossible Placement Tall');
+  expect(() => {
+    userGameboard.placeShip(userGameboard.ships[2], 9, 8, 'tall');
+  }).toThrow('Impossible Placement Tall');
+  expect(() => {
+    userGameboard.placeShip(userGameboard.ships[2],  9, 9, 'tall');
+  }).toThrow('Impossible Placement Tall');
+  expect(() => {
+    userGameboard.placeShip(userGameboard.ships[2],  9, 10, 'tall');
+  }).toThrow('Impossible Placement Tall');
+                                      
+})
+
 test("Can't place a ship at impossible coordinates", () => {
 
 })
