@@ -7,10 +7,18 @@ beforeEach(() => {
   computerGameboard = new Gameboard()
 });
 
-test("Gameboard can place a ship horizontally", () => {
+test.only("Gameboard can place a ship horizontally", () => {
 
-  userGameboard.placeShip(userGameboard.ships[0], 1, 'wide', 'wide')
-  expect(userGameboard.coordinateList).toContain(userGameboard.ships[0])
+  userGameboard.placeShip(userGameboard.ships[0], 1, 1, 'wide',)
+  expect(userGameboard.coordinateList[0]).toEqual(userGameboard.ships[0])
+  expect(userGameboard.coordinateList[1]).toEqual(userGameboard.ships[0])
+
+})
+
+test("Gameboard can place a ship vertically", () => {
+  userGameboard.placeShip(userGameboard.ships[0], 1, 1, 'tall',)
+  expect(userGameboard.coordinateList[0]).toEqual(userGameboard.ships[0])
+  expect(userGameboard.coordinateList[9]).toEqual(userGameboard.ships[0])
 
 })
 
@@ -41,7 +49,7 @@ test('Can place multiple ships', ()=>{
 test("Can't place a ship if it goes outside the boundaries of the X axis", ()=>{
     // X axis would be every 10 coordinates.
     expect(() => {
-      userGameboard.placeShip(userGameboard.ships[2], 9, 'wide');
+      userGameboard.placeShip(userGameboard.ships[2], 9, 1, 'wide');
     }).toThrow('Space occupied');
     expect(() => {
       userGameboard.placeShip(userGameboard.ships[2], 19, 'wide');
