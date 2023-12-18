@@ -6,6 +6,7 @@ class Gameboard {
   constructor() {
     this.coordinateList = this.generateCoordinates();
     this.ships = this.generateShips();
+    this.shipsLeft = false;
   }
   // Creates each ship that a gameboard is allowed to start with
   generateShips() {
@@ -63,10 +64,10 @@ class Gameboard {
       for (let i = 0; i < ship.length; i++) {
         // Horizontal placement
         if (alignment === "wide") {
-          this.coordinateList[locationInArray + i] = ship;
+          this.coordinateList[locationInArray + i].hasShip = ship;
         }
         if (alignment === "tall") {
-          this.coordinateList[locationInArray + i * 10] = ship;
+          this.coordinateList[locationInArray + i * 10].hasShip = ship;
         }
       }
     } else {
@@ -74,7 +75,29 @@ class Gameboard {
     }
   }
 
-  receiveAttack() {}
+  receiveAttack(x, y) {
+    const locationInArray = x - 1 + (y - 1) * 10;
+    // Empty location marks as shot
+    if (this.coordinateList[locationInArray].hasShip == false) {
+      this.coordinateList[locationInArray].isShot = true;
+    }
+    // Location with ship damages ship
+    if (this.coordinateList[locationInArray].hasShip) {
+      this.coordinateList[locationInArray].hasShip.hit();
+      this.checkShipsLeft();
+    }
+  }
+  checkShipsLeft() {
+    let totalShipsSunk = 0;
+    for (let i = 0; i < this.ships.length; i++) {
+      if (this.ships[i].sunk) {
+        totalShipsSunk += 1;
+      }
+    }
+    if ((totalShipsSunk === this.ships.length)) {
+      this.shipsLeft = false;
+    }
+  }
 }
 
 export { Gameboard };
