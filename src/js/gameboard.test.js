@@ -1,10 +1,8 @@
 import { Gameboard } from "./gameboard"
 let userGameboard
-let computerGameboard
 
 beforeEach(() => {
   userGameboard = new Gameboard()
-  computerGameboard = new Gameboard()
 });
 
 test("Gameboard can place a ship horizontally", () => {
@@ -30,7 +28,6 @@ test('Cannot place two ships in same location', ()=> {
 
 })
 
-
 test('Can place multiple ships', () => {
   const userGameboard = new Gameboard();
 
@@ -47,6 +44,7 @@ test('Can place multiple ships', () => {
 
 
 });
+
 test("Can't place a ship if it goes outside the boundaries of the X axis", ()=>{
     expect(() => {
       userGameboard.placeShip(userGameboard.ships[2], 9, 1, 'wide');
@@ -103,10 +101,6 @@ test("Can't place a ship if it goes outside the boundaries of the y axis", ()=>{
           
 })
 
-test("Can't place a ship at impossible coordinates", () => {
-
-})
-
 test('Can hit ship after placement', () => {
   userGameboard.placeShip(userGameboard.ships[2], 9, 6, 'tall');
   userGameboard.receiveAttack(9, 6)
@@ -152,6 +146,16 @@ test('Reports condition if all ships are sunk that belong to gameBoard', () => {
 
 test('Gameboard tracks misses',()=>{
   userGameboard.receiveAttack(9, 6)
+  console.log(userGameboard.coordinateList[58])
+
   expect(userGameboard.coordinateList[58].isShot).toEqual(true)
+})
+
+test('Cannot hit isShot True location', ()=> {
+  userGameboard.receiveAttack(9, 6)
+  expect(() => {
+    userGameboard.receiveAttack(9, 6);
+}).toThrow('Location already shot');
+ 
 
 })
