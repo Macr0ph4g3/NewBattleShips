@@ -1,15 +1,21 @@
 import { Player } from "./player";
 
-
-test.only('player takes name', () => {
-    const bob = new Player('bob','Human')
-    expect(bob.name).toBe('bob');
+test("player takes name", () => {
+  const bob = new Player("bob", "Human");
+  expect(bob.name).toBe("bob");
 });
-// test('fires a shot to enemy gameboard', () => {
-//     bob.fireShot(25, computer);
+test("fires a shot to enemy gameboard", () => {
+  const bob = new Player("bob", "Human");
+  const computer = new Player("computer", "Computer");
+  bob.fireShot(5, 5, computer);
+});
+test("rejects shots fired at locations already fired upon", () => {
+    const bob = new Player("bob", "Human");
+    const computer = new Player("computer", "Computer");
+  
+    bob.fireShot(5, 5, computer);
     
-// });
-// it('rejects shots fired at locations already fired upon', () => {
-//     bob.fireShot(25, testBoard);
-//     bob.fireShot(10, testBoard);
-// });
+    expect(() => {
+      bob.fireShot(5, 5, computer);
+    }).toThrow('Location already shot');
+  });

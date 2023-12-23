@@ -2,26 +2,23 @@ import { Gameboard } from "./gameboard";
 
 class Player {
   constructor(name, role) {
-    this.gameboard = this.generateGameboard()
-    this.role = role
-    this.name = name
+    this.gameboard = this.generateGameboard();
+    this.role = role;
+    this.name = name;
   }
-  generateGameboard(){
-    const playerGameboard = new Gameboard()
-    return playerGameboard
+  generateGameboard() {
+    const playerGameboard = new Gameboard();
+    return playerGameboard;
   }
-  fireShot(x, y, player){
+  fireShot(x, y, player) {
     const locationInArray = x - 1 + (y - 1) * 10;
-
-    if(player.gameboard[locationInArray].isShot === false){
-        player.receiveAttack(x, y)
-        return "Attack successful"
-    } 
-    else {
-        return "Location alreayd shot"
-
+    if (player.gameboard.coordinateList[locationInArray].isShot === false) {
+      player.gameboard.receiveAttack(x, y);
+      return "Attack successful";
+    } else {
+      throw new Error("Location already shot"); // Throw an error instead of returning a string
     }
   }
 }
 
-export { Player }
+export { Player };
