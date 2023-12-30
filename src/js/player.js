@@ -1,10 +1,10 @@
 import { Gameboard } from "./gameboard";
 
 class Player {
-  constructor(name, role) {
+  constructor(role) {
     this.gameboard = this.generateGameboard();
     this.role = role;
-    this.name = name;
+    
   }
   generateGameboard() {
     const playerGameboard = new Gameboard();

@@ -1,3 +1,6 @@
 import "./style.css";
+import { generateGrid } from "./js/gridUI";
 
-console.log('test')
+const playerGameboard = document.querySelectorAll(".playerGrid");
+const computerGameboard = document.querySelectorAll(".computerGrid")
+generateGrid(playerGameboard,computerGameboard)
