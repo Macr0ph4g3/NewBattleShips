@@ -146,7 +146,6 @@ test('Reports condition if all ships are sunk that belong to gameBoard', () => {
 
 test('Gameboard tracks misses',()=>{
   userGameboard.receiveAttack(9, 6)
-  console.log(userGameboard.coordinateList[58])
 
   expect(userGameboard.coordinateList[58].isShot).toEqual(true)
 })
@@ -158,4 +157,15 @@ test('Cannot hit isShot True location', ()=> {
 }).toThrow('Location already shot');
  
 
+})
+test('checking if statement', ()=> {
+  
+  try{
+    userGameboard.placeShip(userGameboard.ships[0], 9, 1, 'wide')
+    console.log(userGameboard.coordinateList[0])
+
+  } catch {
+    console.error("An error occurred:");
+
+  }
 })

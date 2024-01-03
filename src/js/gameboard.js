@@ -31,13 +31,13 @@ class Gameboard {
 
     // If trying to go past the X axis
     if (alignment === "wide") {
-      if (x + ship.length > 10) {
+      if (x + ship.length > 11) {
         throw new Error("Impossible Placement Wide");
       }
     }
     // If trying to go past the Y axis
     if (alignment === "tall") {
-      if (y + ship.length > 10) {
+      if (y + ship.length > 11) {
         throw new Error("Impossible Placement Tall");
       }
     }
@@ -65,9 +65,11 @@ class Gameboard {
         // Horizontal placement
         if (alignment === "wide") {
           this.coordinateList[locationInArray + i].hasShip = ship;
+          // run function for DOM UI
         }
         if (alignment === "tall") {
           this.coordinateList[locationInArray + i * 10].hasShip = ship;
+          // run function for DOM UI
         }
       }
     } else {
