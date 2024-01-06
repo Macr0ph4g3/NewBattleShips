@@ -1,4 +1,4 @@
-function displayShips(player,ship,x,y,alignment){
+function displayShipPlacement(player,ship,x,y,alignment){
     if(player.role === "Human") {
         try{
             player.gameboard.placeShip(ship,x,y,alignment)
@@ -23,22 +23,8 @@ function displayShips(player,ship,x,y,alignment){
             console.error("An error occurred:", e);
         
           }
-    } else {
-        try{
-          if(player.gameboard.receiveAttack(x,y) === true){
-            const row = document.querySelectorAll(`.computerGrid [data-y="${y}"]`);
-            const square = row[0].querySelector(`[data-x="${x}"]`);
-            square.style.backgroundColor = 'orange'
-
-          }
-        }
-        catch(e){
-            console.error("An error occurred:", e);
-        
-          }
-
-    }
+    } 
 }
 
 
-export { displayShips }
+export { displayShipPlacement }

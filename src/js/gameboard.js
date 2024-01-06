@@ -99,6 +99,7 @@ class Gameboard {
       // Mark the empty location as shot
       this.coordinateList[locationInArray].isShot = true;
       console.log('miss')
+      return false
     }
   }
   checkShipsLeft() {
