@@ -82,20 +82,23 @@ class Gameboard {
   
     // If location is already shot, throw an error
     if (this.coordinateList[locationInArray].isShot) {
+      console.log('already shot')
       throw new Error('Location already shot');
     }
   
     // If location has a ship, damage the ship
     if (this.coordinateList[locationInArray].hasShip) {
       this.coordinateList[locationInArray].hasShip.hit();
-  
       // Check if the ship is sunk
       if (this.coordinateList[locationInArray].hasShip.sunk) {
-        this.checkShipsLeft();
+         this.checkShipsLeft();
+      } else {
+        return true
       }
     } else {
       // Mark the empty location as shot
       this.coordinateList[locationInArray].isShot = true;
+      console.log('miss')
     }
   }
   checkShipsLeft() {

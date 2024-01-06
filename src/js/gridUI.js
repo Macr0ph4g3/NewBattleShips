@@ -9,7 +9,6 @@ function generateGrid(playerGameboard, computerGameboard) {
       tr.dataset.y = i;
       tr2.classList.add("gameboardTwoRows");
       tr2.dataset.y = i;
-      console.log(tr, tr2)
       playerGameboard[0].appendChild(tr);
       computerGameboard[0].appendChild(tr2);
       // Then create 10 columns in each row
@@ -32,6 +31,5 @@ function generateGrid(playerGameboard, computerGameboard) {
       workingRow = workingRow + 1;
     }
   }
-
 
   export { generateGrid }
