@@ -1,4 +1,4 @@
-import { Ship } from "./ships.js";
+import { Ship } from "../class-Ships.js";
 let testSmallShip;
 let testMediumShip;
 

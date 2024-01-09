@@ -1,4 +1,4 @@
-import { Ship } from "./ships";
+import { Ship } from "./class-Ships";
 
 // Gameboard allows a user to host all of their ships, along with a list of coordinates. It should track when ships have actually been placed
 

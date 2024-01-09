@@ -1,4 +1,4 @@
-import { Player } from "./player";
+import { Player } from "./class-Player";
 import { generateGrid } from './gridUI'
 
 const playerGameboard = document.querySelectorAll(".playerGrid");

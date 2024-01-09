@@ -1,4 +1,4 @@
-import { Player } from "./player";
+import { Player } from "../class-Player";
 
 
 test("fires a shot to enemy gameboard", () => {

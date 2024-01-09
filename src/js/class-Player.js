@@ -1,4 +1,4 @@
-import { Gameboard } from "./gameboard";
+import { Gameboard } from "./class-Gameboard";
 
 class Player {
   constructor(role) {
