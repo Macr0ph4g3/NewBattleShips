@@ -78,29 +78,34 @@ class Gameboard {
   }
 
   receiveAttack(x, y) {
+    try {
     const locationInArray = x - 1 + (y - 1) * 10;
-  
+      console.log(this.coordinateList[locationInArray])
     // If location is already shot, throw an error
     if (this.coordinateList[locationInArray].isShot) {
-      console.log('already shot')
       throw new Error('Location already shot');
     }
   
     // If location has a ship, damage the ship
     if (this.coordinateList[locationInArray].hasShip) {
       this.coordinateList[locationInArray].hasShip.hit();
+      this.coordinateList[locationInArray].isShot = true;
+      
       // Check if the ship is sunk
       if (this.coordinateList[locationInArray].hasShip.sunk) {
          this.checkShipsLeft();
+         return 'Sunk Ship'
       } else {
-        return true
+        return 'Hit ship'
       }
     } else {
       // Mark the empty location as shot
       this.coordinateList[locationInArray].isShot = true;
-      console.log('miss')
-      return false
+      return 'Miss'
     }
+  } catch (error) {
+    console.error(error.message)
+  }
   }
   checkShipsLeft() {
     let totalShipsSunk = 0;

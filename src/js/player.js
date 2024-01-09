@@ -4,7 +4,7 @@ class Player {
   constructor(role) {
     this.gameboard = this.generateGameboard();
     this.role = role;
-    
+    this.turn = false;
   }
   generateGameboard() {
     const playerGameboard = new Gameboard();
