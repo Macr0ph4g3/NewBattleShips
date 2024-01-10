@@ -6,6 +6,8 @@ import { attackDOM } from "./js/attacklogic";
 // to place ship first, I should run a function that grabs the player role, and the ship information.)
 
 displayShipPlacement(human,human.gameboard.ships[0],5,5,'tall')
+displayShipPlacement(human,human.gameboard.ships[1],1,1,'tall')
+
 computer.gameboard.placeShip(computer.gameboard.ships[0],1,1,'tall')
 computer.gameboard.placeShip(computer.gameboard.ships[1],2,1,'tall')
 computer.gameboard.placeShip(computer.gameboard.ships[2],3,1,'tall')

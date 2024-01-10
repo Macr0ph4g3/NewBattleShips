@@ -5,8 +5,8 @@ const playerGameboard = document.querySelectorAll(".playerGrid");
 const computerGameboard = document.querySelectorAll(".computerGrid")
 generateGrid(playerGameboard,computerGameboard)
 
-const human = new Player("Human");
-const computer = new Player("Computer");
+const human = new Player("player");
+const computer = new Player("computer");
 
 
 export { human, computer }

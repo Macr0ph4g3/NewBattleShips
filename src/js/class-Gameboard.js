@@ -80,10 +80,9 @@ class Gameboard {
   receiveAttack(x, y) {
     try {
     const locationInArray = x - 1 + (y - 1) * 10;
-      console.log(this.coordinateList[locationInArray])
     // If location is already shot, throw an error
     if (this.coordinateList[locationInArray].isShot) {
-      throw new Error('Location already shot');
+      return ('Location already shot');
     }
   
     // If location has a ship, damage the ship

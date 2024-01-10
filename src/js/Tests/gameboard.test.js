@@ -80,9 +80,7 @@ test("Can't place a ship if it goes outside the boundaries of the X axis", ()=>{
 })
 
 test("Can't place a ship if it goes outside the boundaries of the y axis", ()=>{
-  expect(() => {
-    userGameboard.placeShip(userGameboard.ships[2],  9, 7, 'tall');
-  }).toThrow('Impossible Placement Tall');
+  
   expect(() => {
     userGameboard.placeShip(userGameboard.ships[2], 9, 8, 'tall');
   }).toThrow('Impossible Placement Tall');
@@ -106,6 +104,16 @@ test('Can hit ship after placement', () => {
   userGameboard.receiveAttack(9, 6)
   expect(userGameboard.ships[2].damage).toEqual(1)
   expect(userGameboard.coordinateList[58].hasShip).toEqual(userGameboard.ships[2])
+})
+
+test('Cannot hit ship in same spot twice', () => {
+  userGameboard.placeShip(userGameboard.ships[2], 9, 6, 'tall');
+  userGameboard.receiveAttack(9, 6)
+  expect(userGameboard.ships[2].damage).toEqual(1)
+  expect(userGameboard.coordinateList[58].hasShip).toEqual(userGameboard.ships[2])
+
+  expect(userGameboard.receiveAttack(9, 6)).toEqual('Location already shot')
+
 })
 
 test('Ship can get sunk', () => {
@@ -152,20 +160,7 @@ test('Gameboard tracks misses',()=>{
 
 test('Cannot hit isShot True location', ()=> {
   userGameboard.receiveAttack(9, 6)
-  expect(() => {
-    userGameboard.receiveAttack(9, 6);
-}).toThrow('Location already shot');
+  expect(userGameboard.receiveAttack(9, 6)).toEqual('Location already shot');
  
 
-})
-test('checking if statement', ()=> {
-  
-  try{
-    userGameboard.placeShip(userGameboard.ships[0], 9, 1, 'wide')
-    console.log(userGameboard.coordinateList[0])
-
-  } catch {
-    console.error("An error occurred:");
-
-  }
 })

@@ -1,5 +1,5 @@
 function displayShipPlacement(player,ship,x,y,alignment){
-    if(player.role === "Human") {
+    if(player.role === "player") {
         try{
             player.gameboard.placeShip(ship,x,y,alignment)
         if(alignment == 'tall'){
