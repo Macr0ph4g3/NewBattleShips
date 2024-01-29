@@ -79,6 +79,7 @@ class Gameboard {
 
   receiveAttack(x, y) {
     try {
+
     const locationInArray = x - 1 + (y - 1) * 10;
     // If location is already shot, throw an error
     if (this.coordinateList[locationInArray].isShot) {
