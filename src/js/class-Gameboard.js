@@ -6,13 +6,13 @@ class Gameboard {
   constructor() {
     this.coordinateList = this.generateCoordinates();
     this.ships = this.generateShips();
-    this.shipsLeft = false;
+    this.shipsLeft = true;
   }
   // Creates each ship that a gameboard is allowed to start with
   generateShips() {
     const testSmallShip = new Ship("smallship", 2);
     const testMediumShip = new Ship("mediumship", 3);
-    const testLargeShip = new Ship("mediumship", 4);
+    const testLargeShip = new Ship("largeship", 4);
 
     const shipArray = [testSmallShip, testMediumShip, testLargeShip];
     return shipArray;
@@ -26,8 +26,12 @@ class Gameboard {
     }
     return coordinates;
   }
-  placeShip(ship, x, y, alignment) {
+  locationCalculator(x,y){
     const locationInArray = x - 1 + (y - 1) * 10;
+    return locationInArray
+  }
+  placeShip(ship, x, y, alignment) {
+    const locationInArray = this.locationCalculator(x,y)
 
     // If trying to go past the X axis
     if (alignment === "wide") {
@@ -80,7 +84,7 @@ class Gameboard {
   receiveAttack(x, y) {
     try {
 
-    const locationInArray = x - 1 + (y - 1) * 10;
+    const locationInArray = this.locationCalculator(x,y)
     // If location is already shot, throw an error
     if (this.coordinateList[locationInArray].isShot) {
       return ('Location already shot');

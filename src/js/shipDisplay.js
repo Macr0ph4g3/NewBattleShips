@@ -6,7 +6,7 @@ function displayShipPlacement(player,ship,x,y,alignment){
             for (let i = 0; i < ship.length; i++) {
                 const row = document.querySelectorAll(`.playerGrid [data-y="${y+i}"]`);
                 const square = row[0].querySelector(`[data-x="${x}"]`);
-                square.style.backgroundColor = "red";
+                square.style.backgroundColor = "green";
             } 
         }
         else {

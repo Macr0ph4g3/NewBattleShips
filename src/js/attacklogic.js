@@ -1,3 +1,5 @@
+import { showGameOver } from "./gameover";
+
 function attackDOM(attacker, x, y, defender) {
   // First determine the defenders square
   const defenderSquare = document.querySelector(
@@ -5,7 +7,7 @@ function attackDOM(attacker, x, y, defender) {
   );
   let resultColor;
   const attackerTurn = attacker.turn;
-
+  
   // If it's actually their turn, then you can attack.
   if (attackerTurn) {
     // Color square if attacks valid
@@ -17,7 +19,32 @@ function attackDOM(attacker, x, y, defender) {
           break;
 
         case "Sunk Ship":
-          resultColor = "red";
+
+        resultColor = "red";
+
+        // The below is calculate which spots in the array have that specific ship, so as to color each square on the grid "red"
+          const locationInArray = defender.gameboard.locationCalculator(x,y);
+          const shipName = defender.gameboard.coordinateList[locationInArray].hasShip.name
+          const shipLocations = []
+          for (let i = 0; i < defender.gameboard.coordinateList.length; i++) {
+            if (defender.gameboard.coordinateList[i].hasShip.name === shipName) {
+              shipLocations.push(i);
+            }
+          }
+          shipLocations.forEach(segment => {
+            const x = (segment % 10) + 1;
+            const y = Math.floor(segment / 10) + 1;
+            const shipSection = document.querySelector(
+              `.${defender.role}Grid [data-y="${y}"] [data-x="${x}"]`
+            );
+          
+            shipSection.style.backgroundColor = resultColor
+          });
+          
+          if(defender.gameboard.shipsLeft === false){
+            showGameOver()
+          }
+        
           break;
 
         case "Location already shot":
